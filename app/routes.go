@@ -8,6 +8,6 @@ import (
 func getRouter() *mux.Router {
 	r := mux.NewRouter()
 	r.HandleFunc("/honey", handler.CreateHoneyHandler).Methods("POST")
-	r.HandleFunc("/honey", handler.GetHoneyHandler).Methods("GET")
+	r.HandleFunc("/{key}", handler.CatchHandler).Methods("GET")
 	return r
 }

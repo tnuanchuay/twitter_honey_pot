@@ -6,5 +6,5 @@ import (
 )
 
 func main () {
-	log.Fatal(app.GetServer().ListenAndServe())
+	log.Fatal(app.CreateApp().ListenAndServe())
 }

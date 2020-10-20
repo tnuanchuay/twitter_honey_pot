@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func GetServer () *http.Server {
+func getServer() *http.Server {
 	return &http.Server{
 		Handler:      getRouter(),
 		Addr:         ":8000",

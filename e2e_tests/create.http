@@ -1,0 +1,8 @@
+### Send POST request with body as parameters
+POST http://localhost:8000/honey
+Content-Type: application/x-www-form-urlencoded
+
+userId=@tomato&redirectTo=http://www.google.com&url=abcdef
+
+###
+GET http://localhost:8000/abcdef
