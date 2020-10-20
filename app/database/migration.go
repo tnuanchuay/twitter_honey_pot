@@ -53,7 +53,7 @@ func MigrateDb() error {
 		id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 		honey_id INT NOT NULL,
 		hit_time TIMESTAMP NOT NULL,
-		ip VARCHAR(16),
+		ip VARCHAR(1024),
 		referer_url VARCHAR(300),
 		x_forwarded_for VARCHAR(100)
 	)
