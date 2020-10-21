@@ -6,6 +6,7 @@ import (
 	"github.com/ipdata/go"
 	"log"
 	"net"
+	"os"
 	"strings"
 )
 
@@ -19,7 +20,7 @@ func GetIpData(ips string) (*ipdata.IP, error) {
 		return nil, errors.New(fmt.Sprintf("%s is not ipv4", ips))
 	}
 
-	client, err := ipdata.NewClient("test")
+	client, err := ipdata.NewClient(os.Getenv("IPDATA_TOKEN"))
 	if err != nil {
 		return nil, err
 	}
