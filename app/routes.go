@@ -7,7 +7,8 @@ import (
 
 func getRouter() *mux.Router {
 	r := mux.NewRouter()
+	r.HandleFunc("/catch/{path}", handler.GetCatchHandler).Methods("GET")
 	r.HandleFunc("/honey", handler.CreateHoneyHandler).Methods("POST")
-	r.HandleFunc("/{key}", handler.CatchHandler).Methods("GET")
+	r.HandleFunc("/{path}", handler.CreateCatchHandler).Methods("GET")
 	return r
 }

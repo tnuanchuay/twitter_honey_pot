@@ -31,7 +31,7 @@ func StoreNewCatch(url, ip, referralUrl, xForwardedFor string) (*model.Catch, er
 		HoneyId:       record[0].Id,
 		HitTime:       hitTime,
 		Ip:            ip,
-		ReferralUrl:   referralUrl,
+		RefererUrl:    referralUrl,
 		XForwardedFor: xForwardedFor,
 	}
 
@@ -60,4 +60,26 @@ func StoreNewCatch(url, ip, referralUrl, xForwardedFor string) (*model.Catch, er
 	}
 
 	return repository.CreateCatch(c)
+}
+
+func GetCatchByPath(path string) ([]model.Catch, error){
+	path = strings.TrimLeft(path, "/")
+	h := model.Honey{
+		Url: path,
+	}
+
+	honeys, err := repository.GetHoney(&h)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(honeys) != 1 {
+		return make([]model.Catch, 0), nil
+	}
+
+	c := model.Catch{
+		HoneyId: honeys[0].Id,
+	}
+	
+	return repository.GetCatch(&c)
 }

@@ -2,14 +2,15 @@ package app
 
 import (
 	"net/http"
+	"os"
 	"time"
 )
 
 func getServer() *http.Server {
 	return &http.Server{
 		Handler:      getRouter(),
-		Addr:         ":80",
-		WriteTimeout: 1 * time.Second,
-		ReadTimeout:  1 * time.Second,
+		Addr:         os.Getenv("PORT"),
+		WriteTimeout: 60 * time.Second,
+		ReadTimeout:  60 * time.Second,
 	}
 }

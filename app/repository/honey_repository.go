@@ -44,25 +44,25 @@ func GetHoney(honey *model.Honey) ([]model.Honey, error) {
 	query := `SELECT create_date, user_id, url, redirect_to, id FROM ` + database.DbName + `.honey`
 	params := make([]interface{}, 0)
 	if honey != nil {
-		query = query + " WHERE"
+		query = query + " WHERE 1 = 1 "
 
 		if honey.CreateDate != "" {
-			query = query + " create_date = ?"
+			query = query + "AND create_date = ? "
 			params = append(params, honey.CreateDate)
 		}
 
 		if honey.UserId != "" {
-			query = query + " user_id = ?"
+			query = query + "AND user_id = ? "
 			params = append(params, honey.UserId)
 		}
 
 		if honey.Url != "" {
-			query = query + " url = ? "
+			query = query + "AND url = ? "
 			params = append(params, honey.Url)
 		}
 
 		if honey.RedirectTo != "" {
-			query = query + " redirect_to = ? "
+			query = query + "AND redirect_to = ? "
 			params = append(params, honey.RedirectTo)
 		}
 	}
@@ -72,7 +72,6 @@ func GetHoney(honey *model.Honey) ([]model.Honey, error) {
 		return nil, err
 	}
 	defer statement.Close()
-
 	rows, err := statement.Query(params...)
 	if err != nil {
 		return nil, err
