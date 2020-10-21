@@ -12,13 +12,38 @@ func CreateCatch(catch model.Catch) (*model.Catch, error){
 	}
 	defer db.Close()
 
-	statement, err := db.Prepare(`INSERT INTO ` + database.DbName + `.catch(honey_id, hit_time, ip, referer_url) VALUES(?, ?, ?, ?)`)
+	statement, err := db.Prepare(database.CreateCatch)
 	if err != nil {
 		return nil, err
 	}
 	defer statement.Close()
 
-	result, err := statement.Exec(catch.HoneyId, catch.HitTime, catch.Ip, catch.ReferralUrl)
+	result, err := statement.Exec(
+		catch.HoneyId,
+		catch.HitTime,
+		catch.Ip,
+		catch.ReferralUrl,
+		catch.XForwardedFor,
+		catch.City,
+		catch.CountryName,
+		catch.CountryCode,
+		catch.ContinentName,
+		catch.Latitude,
+		catch.Longitude,
+		catch.AsnId,
+		catch.AsnName,
+		catch.AsnDomain,
+		catch.AsnRoute,
+		catch.AsnType,
+		catch.IsTor,
+		catch.IsProxy,
+		catch.IsAnonymous,
+		catch.IsKnownAttacker,
+		catch.IsKnownAbUser,
+		catch.IsThreat,
+		catch.IsBogon,
+		)
+
 	if err != nil {
 		return nil, err
 	}
